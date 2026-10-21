@@ -264,6 +264,34 @@
     });
   }
 
+  /* Spotify embed on the page: only load when it gets close to the viewport */
+
+  var embeds = Array.prototype.filter.call(document.querySelectorAll("iframe[data-src]"), function (frame) {
+    return !frame.closest("#panel");
+  });
+  if (embeds.length) {
+    var loadEmbed = function (frame) {
+      if (!frame.getAttribute("src")) frame.src = frame.getAttribute("data-src");
+    };
+    if ("IntersectionObserver" in window) {
+      var embedObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            loadEmbed(entry.target);
+            embedObserver.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "300px 0px" }
+      );
+      embeds.forEach(function (frame) {
+        embedObserver.observe(frame);
+      });
+    } else {
+      embeds.forEach(loadEmbed);
+    }
+  }
+
   /* 7. Forms */
 
   function setStatus(form, text, ok) {
