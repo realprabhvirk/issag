@@ -553,6 +553,11 @@ button {
   gap: 16px;
 }
 
+.panel .tile--follow {
+  aspect-ratio: auto;
+  min-height: 96px;
+}
+
 .panel__email {
   font-size: 17px;
   font-weight: 500;
@@ -754,7 +759,9 @@ main {
   .hero__media img {
     object-position: 64% 46%;
   }
+}
 
+@media (min-width: 1200px) {
   .hero__inner {
     flex-direction: row;
     align-items: flex-end;
@@ -869,19 +876,8 @@ a.video:hover img {
     align-items: start;
   }
 
-  .tiles--follow-wide {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
   .stream-grid .tiles--follow-wide {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stream-grid .tile--follow {
-    aspect-ratio: auto;
-    min-height: 112px;
   }
 }
 
@@ -1225,10 +1221,13 @@ textarea.input {
 }
 
 .contact-links {
-  display: grid;
-  gap: 32px;
   padding-block: var(--section-pad);
   border-top: 1px solid var(--graphite);
+}
+
+.contact-links .container {
+  display: grid;
+  gap: 32px;
 }
 
 .contact-links h2 {
@@ -1253,6 +1252,11 @@ textarea.input {
 @media (min-width: 600px) {
   .tiles--follow-wide {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tiles--follow-wide .tile--follow {
+    aspect-ratio: auto;
+    min-height: 112px;
   }
 }
 
